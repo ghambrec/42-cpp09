@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/07 10:41:45 by ghambrec          #+#    #+#              #
-#    Updated: 2026/02/20 13:43:04 by ghambrec         ###   ########.fr        #
+#    Updated: 2026/02/20 13:47:20 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDE = ./inc
 CXXFLAGS += -I$(INCLUDE)
 
 # program name
-NAME = BitcoinExchange
+NAME = btc
 
 # source files
 VPATH =	src

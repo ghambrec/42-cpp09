@@ -1,2 +1,3 @@
-/src
-BitcoinExchange
+src/
+btc
+ex00/input/no_permission.txt
