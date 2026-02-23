@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:16 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/23 13:13:34 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/23 13:26:08 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void BitcoinExchange::loadDatabase(const std::string& file)
 {
 	std::ifstream dbfile(file);
 	if (!dbfile)
-	{
-		std::cerr << "Error: Couldn't open Database file!";
-		exit(1);
-	}
+		throw std::runtime_error("Error: Couldn't open database file!");
 	
 	std::string line;
 	while (std::getline(dbfile, line))

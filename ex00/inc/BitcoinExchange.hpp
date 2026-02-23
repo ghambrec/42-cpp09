@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:14 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/23 13:13:41 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/23 13:24:23 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <map>
 #include <regex>
 #include <fstream>
+#include <stdexcept>
 
 inline const std::string DB_FILE{"data/data.csv"};
 inline const std::regex REGEX{R"(...)"};
