@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:14 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/23 13:24:23 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:50:07 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdexcept>
 
 inline const std::string DB_FILE{"data/data.csv"};
-inline const std::regex REGEX{R"(...)"};
+inline const std::regex REGEX_LINE{R"(^(\d{4}-\d{2}-\d{2})\s\|\s(\d{1,4}(?:\.\d*)?)$)"};
 
 class BitcoinExchange
 {
