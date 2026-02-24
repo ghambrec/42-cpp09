@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:18 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/24 15:11:19 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/24 15:26:25 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void process_input_file(char *argv, BitcoinExchange& btc_db)
 			std::cerr << e.what() << '\n';
 		}
 	}
+	if (i == 0)
+		throw std::runtime_error("Error: Empty file!");
 }
 
 int main(int argc, char **argv)
