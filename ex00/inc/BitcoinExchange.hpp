@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:14 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/24 13:30:39 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:50:58 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ class BitcoinExchange
 
 		// member functions
 		void loadDatabase(const std::string& file);
+		double find(std::string& date, int i) const;
 };

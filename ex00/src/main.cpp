@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:18 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/24 13:37:53 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/24 15:11:19 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,15 @@ bool check_value(float value)
 	return (true);
 }
 
-void parse_line(std::string& line, int i)
+void process_line(std::string& date, float value, BitcoinExchange& btc_db, int i)
+{
+	double btc_amount = btc_db.find(date, i);
+	double result = static_cast<double>(value) * btc_amount;
+
+	std::cout << date << " => " << value << " = " << result << std::endl;
+}
+
+void parse_and_process_line(std::string& line, int i, BitcoinExchange& btc_db)
 {
 	std::smatch match;
 	if (!std::regex_match(line, match, REGEX_LINE))
@@ -58,9 +66,11 @@ void parse_line(std::string& line, int i)
 	
 	if (!check_value(value))
 		throw std::runtime_error("Error at line " + std::to_string(i) + ": Invalid value!");
+
+	process_line(date, value, btc_db, i);
 }
 
-void process_input_file(char *argv)
+void process_input_file(char *argv, BitcoinExchange& btc_db)
 {
 	std::ifstream input_file(argv);
 	if (!input_file)
@@ -78,14 +88,12 @@ void process_input_file(char *argv)
 		}
 		try
 		{
-			std::cout << "[" << i << "] "; // zum testen
-			parse_line(line, i);
+			parse_and_process_line(line, i, btc_db);
 		}
 		catch(const std::exception& e)
 		{
 			std::cerr << e.what() << '\n';
 		}
-		break; // zum testen nur eine zeile nehmen
 	}
 }
 
@@ -98,17 +106,14 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	BitcoinExchange btc;
+	BitcoinExchange btc_db;
 	try
 	{
-		btc.loadDatabase(DB_FILE);
-		process_input_file(argv[1]);
+		btc_db.loadDatabase(DB_FILE);
+		process_input_file(argv[1], btc_db);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
-
-
 }
