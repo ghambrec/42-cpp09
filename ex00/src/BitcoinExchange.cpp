@@ -6,21 +6,20 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:16 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/24 15:04:34 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/24 15:12:29 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange() { std::cout << "CONSTRUCTOR CALLED\n"; }
+BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
 	:	btc_(other.btc_)
-{ std::cout << "copy CONSTRUCTOR CALLED\n"; }
+{}
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 {
-	 std::cout << "assignment CONSTRUCTOR CALLED\n"; 
 	if (this != &other)
 		btc_ = other.btc_;
 	return (*this);
