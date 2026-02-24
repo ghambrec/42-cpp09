@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:42:18 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/24 15:26:25 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/02/24 23:39:18 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,5 @@ int main(int argc, char **argv)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	return (0);
 }
