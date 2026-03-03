@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:11 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/03 17:13:56 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/03 22:39:25 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,22 @@ static int parse_argument(const std::string& str)
 		throw std::runtime_error("Error: Detected a non number value!");
 	
 	long long ln = std::stoll(str);
-	if (ln <= 0)
-		throw std::runtime_error("Error: Detected number smaller equals 0");
+	if (ln < 0)
+		throw std::runtime_error("Error: Detected number smaller 0");
 	if (ln > std::numeric_limits<int>::max())
 		throw std::runtime_error("Error: Detected number bigger than INT_MAX");
 	return (static_cast<int>(ln));
+}
+
+void print_vector(const std::vector<int>& v)
+{
+	// print given numbers
+	std::cout << "Numbers: ";
+	for (int n : v)
+	{
+		std::cout << n << " ";	
+	}
+	std::cout << "\n";
 }
 
 int main(int argc, char** argv)
@@ -46,16 +57,12 @@ int main(int argc, char** argv)
 			i++;
 		}
 
-		// print given numbers
-		std::cout << "Numbers: ";
-		for (int n : v)
-		{
-			std::cout << n << " ";	
-		}
-		std::cout << "\n";
+		// print vector
+		print_vector(v);
 
 		// algo
 		fjalgo(v, 1);
+		// fjalgo(v, 4);
 	
 	}
 	catch(const std::exception& e)

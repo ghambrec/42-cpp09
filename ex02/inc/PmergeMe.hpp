@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:38 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/03 15:31:36 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/03 22:35:25 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 #include <regex>
 #include <limits>
 
-void fjalgo(std::vector<int>& v, int pair_size);
+void print_vector(const std::vector<int>& v);
+void fjalgo(std::vector<int>& v, size_t pair_size);
 
