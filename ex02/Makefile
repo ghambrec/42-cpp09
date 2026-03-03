@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/07 10:41:45 by ghambrec          #+#    #+#              #
-#    Updated: 2026/02/25 13:05:51 by ghambrec         ###   ########.fr        #
+#    Updated: 2026/03/03 14:16:36 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDE = ./inc
 CXXFLAGS += -I$(INCLUDE)
 
 # program name
-NAME = RPN
+NAME = PmergeMe
 
 # source files
 VPATH =	src
@@ -57,7 +57,7 @@ debug: CXXFLAGS += $(FLAG_DEBUG)
 debug: $(NAME)
 
 run: $(NAME)
-	./$(NAME)
+	./$(NAME) `shuf -i 1-50 -n 5 | tr "\n" " "`
 
 valgrind: fclean debug
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
