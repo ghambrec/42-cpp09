@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:11 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/03 15:02:08 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:13:56 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int main(int argc, char** argv)
 			std::cout << n << " ";	
 		}
 		std::cout << "\n";
+
+		// algo
+		fjalgo(v, 1);
 	
 	}
 	catch(const std::exception& e)

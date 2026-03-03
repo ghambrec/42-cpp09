@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/07 10:41:45 by ghambrec          #+#    #+#              #
-#    Updated: 2026/03/03 14:16:36 by ghambrec         ###   ########.fr        #
+#    Updated: 2026/03/03 15:26:59 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ debug: CXXFLAGS += $(FLAG_DEBUG)
 debug: $(NAME)
 
 run: $(NAME)
-	./$(NAME) `shuf -i 1-50 -n 5 | tr "\n" " "`
+	./$(NAME) `shuf -i 1-50 -n 22 | tr "\n" " "`
 
 valgrind: fclean debug
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
