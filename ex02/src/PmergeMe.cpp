@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/04 11:11:32 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/04 11:40:40 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void fjalgo(std::vector<int>& v, size_t pair_size)
 		size_t key_left = start_right - 1;
 		size_t key_right = start_right + pair_size - 1;
 
-		if (v[key_left] > v[key_right])
+		if (v[key_left] > v[key_right]) // vergleich
 		{
 			for (size_t i = 0; i < pair_size; i++)
 			{
@@ -36,12 +36,48 @@ void fjalgo(std::vector<int>& v, size_t pair_size)
 		}
 	}
 
+	size_t pair = 0;
+	size_t start_left = (2 * pair) * pair_size;
+	size_t start_right = (2 * pair + 1) * pair_size;
+	size_t key_left = start_right - 1;
+	size_t key_right = start_right + pair_size - 1;
+
 	// printing for debug
 	std::cout << "pairsize: " << pair_size << std::endl;
+	std::cout << "- start l/f: " << start_left << "/" << start_right << std::endl;
+	std::cout << "- key l/f:   " << key_left << "/" << key_right << std::endl;
 	std::cout << "- elements: " << count_elements << "; pairs: " << count_pairs << std::endl;
 	std::cout << "- after sorting ";
 	print_vector(v);
 	
 	fjalgo(v, pair_size * 2);
+
+	// step 2 - build main and pend
+	std::vector<int> main;
+	std::vector<int> pend;
+
+	for (size_t pair = 0; pair < count_pairs; pair++)
+	{
+		if (pair == 0) // b1 kopieren
+		{
+			for (size_t i = 0; i < pair_size; i++)
+			{
+				main.push_back(v[i]);
+			}
+		}
+		// restlichen a's kopieren
+		// size_t start_left = (2 * pair) * pair_size;
+		size_t start_right = (2 * pair + 1) * pair_size;
+		// size_t key_left = start_right - 1;
+		size_t key_right = start_right + pair_size - 1;
+		main.insert(main.end(), v.begin() + start_right, v.begin() + key_right + 1);
+		
+		// b1 auch mit insert kopieren? start left key left benoetigt dafuer
+	}
+	
+	std::cout << "- mainchain ";
+	print_vector(main);
+
+	
 		
 }
