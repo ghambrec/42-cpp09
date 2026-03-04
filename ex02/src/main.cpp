@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:11 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/03 22:39:25 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/04 16:08:59 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int main(int argc, char** argv)
 			i++;
 		}
 
-		// print vector
-		print_vector(v);
+		// print_vector(v);
 
 		// algo
 		fjalgo(v, 1);
