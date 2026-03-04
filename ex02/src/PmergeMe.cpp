@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/03 22:51:16 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/04 11:11:32 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@ void fjalgo(std::vector<int>& v, size_t pair_size)
 	if ((v.size() / pair_size) < 2)
 		return ;
 	
-	std::cout << "pairsize: " << pair_size << std::endl;
-	
+	// step 1 - build and sort pairs
 	size_t count_elements = v.size() / pair_size;
-	size_t count_pairs = count_elements / 2;
-
-	std::cout << "- elements: " << count_elements << "; pairs: " << count_pairs << std::endl;
-		
+	size_t count_pairs = count_elements / 2;	
 	for (size_t pair = 0; pair < count_pairs; pair++)
 	{
 		size_t start_left = (2 * pair) * pair_size;
@@ -38,18 +34,11 @@ void fjalgo(std::vector<int>& v, size_t pair_size)
 				std::swap(v[start_left + i], v[start_right + i]);
 			}
 		}
-		
 	}
 
-	
-	size_t pair = 0;
-	size_t start_left = (2 * pair) * pair_size;
-	size_t start_right = (2 * pair + 1) * pair_size;
-	size_t key_left = start_right - 1;
-	size_t key_right = start_right + pair_size - 1;
-
-	std::cout << "- start l/f: " << start_left << "/" << start_right << std::endl;
-	std::cout << "- key l/f:   " << key_left << "/" << key_right << std::endl;
+	// printing for debug
+	std::cout << "pairsize: " << pair_size << std::endl;
+	std::cout << "- elements: " << count_elements << "; pairs: " << count_pairs << std::endl;
 	std::cout << "- after sorting ";
 	print_vector(v);
 	
