@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/04 13:06:18 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/04 13:08:43 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void fjalgo(std::vector<int>& v, size_t element_size)
 		rest.insert(rest.begin(), v.end() - anzahl_rest, v.end());
 	
 
-	std::cout << "pairsize: " << element_size << std::endl;
+	std::cout << "ELEMENT SIZE: " << element_size << std::endl;
 	std::cout << "- elements: " << count_elements << "; pairs: " << count_pairs << std::endl;
 	std::cout << "- mainchain ";
 	print_vector(main);
