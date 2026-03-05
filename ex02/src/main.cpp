@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:11 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/04 16:08:59 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/05 14:58:44 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int parse_argument(const std::string& str)
 
 void print_vector(const std::vector<int>& v)
 {
-	// print given numbers
 	std::cout << "Numbers: ";
 	for (int n : v)
 	{

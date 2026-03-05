@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/05 14:55:55 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/05 15:41:21 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void print_vector(const std::vector<size_t> &v)
 {
-	// print given numbers
 	for (size_t n : v)
 	{
 		std::cout << n << " ";
@@ -27,8 +26,8 @@ static std::vector<size_t> get_insertion_order(size_t pend_count)
 	std::vector<size_t> insertion_order;
 	insertion_order.reserve(pend_count);
 
-	size_t prev_jacob = 1; // b1 (is schon in main drin)
-	size_t curr_jacob = 3; // b2, b3 (in pend)
+	size_t prev_jacob = 1;
+	size_t curr_jacob = 3;
 
 	while (insertion_order.size() < pend_count)
 	{
@@ -51,7 +50,10 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 	if ((v.size() / element_size) < 2)
 		return;
 
-	// step 1 - build and sort pairs
+	// ############### STEP 1 - BUILD AND SORT PAIRS ###############
+	// pair = [b,a]
+	// b = smaller value
+	// a = bigger value
 	size_t count_elements = v.size() / element_size;
 	size_t count_pairs = count_elements / 2;
 	for (size_t pair = 0; pair < count_pairs; pair++)
@@ -70,134 +72,75 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 		}
 	}
 
-	// // printing for debug
-	// size_t pair = 0;
-	// size_t start_left = (2 * pair) * element_size;
-	// size_t start_right = (2 * pair + 1) * element_size;
-	// size_t key_left = start_right - 1;
-	// size_t key_right = start_right + element_size - 1;
-	// std::cout << "pairsize: " << element_size << std::endl;
-	// std::cout << "- start l/f: " << start_left << "/" << start_right << std::endl;
-	// std::cout << "- key l/f:   " << key_left << "/" << key_right << std::endl;
-	// std::cout << "- elements: " << count_elements << "; pairs: " << count_pairs << std::endl;
-	// std::cout << "- after sorting pairs ";
-	// print_vector(v);
-
 	fjalgo(v, element_size * 2);
 
 
-
-
-	
-	// step 2 - build main and pend
+	// ############### STEP 2 - BUILD MAIN AND PEND CHAIN ###############
+	// main: b1, a1, a2, a3, ...
+	// pend: b2, b3, b4, ....
 	std::vector<int> main;
 	std::vector<int> pend;
 
+	// for each pair
 	for (size_t pair = 0; pair < count_pairs; pair++)
 	{
 		size_t start_left = (2 * pair) * element_size;
 		size_t start_right = (2 * pair + 1) * element_size;
 
-		if (pair == 0) // b1 kopieren
+		// b
+		if (pair == 0) // b1 to main chain
 			main.insert(main.end(), v.begin() + start_left, v.begin() + start_left + element_size);
-		else
+		else // other b's in pend chain
 			pend.insert(pend.end(), v.begin() + start_left, v.begin() + start_left + element_size);
 
-		// restlichen a's kopieren
+		// a to main chain
 		main.insert(main.end(), v.begin() + start_right, v.begin() + start_right + element_size);
 	}
-	// ggf. unpaired element mit in pend aufnehmen
+	// add unpaired element to pend
 	if (count_elements % 2 == 1)
 	{
 		size_t start_missing = (count_elements - 1) * element_size;
 		pend.insert(pend.end(), v.begin() + start_missing, v.begin() + start_missing + element_size);
 	}
 
-	// std::vector<int> rest;
-	// size_t anzahl_rest = v.size() - ((element_size * 2) * count_pairs);
-	// size_t numbers_used = element_size * 2  * count_pairs;
-	// if (anzahl_rest > 0)
-	// 	rest.insert(rest.begin(), v.end() - anzahl_rest, v.end());
 
-	if (element_size == 4)
-	{
-		// print for debugging
-		std::cout << "ELEMENT SIZE: " << element_size << std::endl;
-		// std::cout << "- restsize: " << anzahl_rest << std::endl;
-		// std::cout << "- usednumb: " << numbers_used << std::endl;
-		// std::cout << "- ";
-		// print_vector(v);
-		std::cout << "- elements: " << count_elements << "; pairs: " << count_pairs << std::endl;
-		std::cout << "- mainchain ";
-		print_vector(main);
-		std::cout << "- pendchain ";
-		print_vector(pend);
-		// std::cout << "- restchain ";
-		// print_vector(rest);
-	}
-
-
-
-
-
-
-
-
-
-	// step 3 - insert pend into main
-
-	// nur noetig wenn ein pend da ist
+	// ############### STEP 3 - INSERT PEND IN MAIN CHAIN ###############
+	// respect the border: b2 has to be before a2
 	size_t pend_count = pend.size() / element_size;
 	if (pend_count > 0)
 	{
 		std::vector<size_t> insertion_order = get_insertion_order(pend_count);
 
+		// save original position in main for border
+		std::vector<size_t> main_positions;
+		for (size_t i = 0; i <= count_pairs; i++)
+			main_positions.push_back(i); // b1, a1, a2, a3, ...
 
-		if (element_size == 4)
-		{
-			std::cout << "- >> insertfolge: ";
-			print_vector(insertion_order);
-		}
-
-		// save original position for border (search_end)
-		std::vector<size_t> main_ids;
-		for (size_t k = 0; k <= count_pairs; k++)
-			main_ids.push_back(k); // b1, a1, a2, a3, ...
-
-		// jedes pend element bearbeiten
+		// for each pend element
 		for (size_t i = 0; i < insertion_order.size(); i++)
 		{
 			size_t pend_idx = insertion_order[i];
 
-			// get the current pend element
+			// get current pend element
 			std::vector<int> cur_pend_element(pend.begin() + pend_idx * element_size, pend.begin() + (pend_idx + 1) * element_size);
 			int key = cur_pend_element[element_size - 1];
 
-			if (element_size == 4)
-			{
-				std::cout << "- ELEM INSERT: ";
-				print_vector(cur_pend_element);
-			}
-
-
-			// ### BOUND BERECHNEN HIER NOCH EINBAUEN ###
-			// claculate border (pend[b +2])
-			size_t border = main_ids.size(); // ganze main chain durchsuchen
-
+			// claculate border
+			// id = (pend[b +2])
+			size_t border = main_positions.size(); // whole main chain
 			// if odd then search in the whole main chain, because it has no a
 			bool is_odd_element = false;
 			if ((count_elements % 2 == 1) && (pend_idx == pend_count - 1))
 				is_odd_element = true;
-
 			if (!is_odd_element)
 			{
 				size_t a_element_id = pend_idx + 2;
-				// search for index of the a element in main_ids
-				for (size_t i = 0; i < main_ids.size(); i++)
+				// search for index of the a element in main_positions
+				for (size_t j = 0; j < main_positions.size(); j++)
 				{
-					if (main_ids[i] == a_element_id)
+					if (main_positions[j] == a_element_id)
 					{
-						border = i;
+						border = j;
 						break ;
 					}
 				}
@@ -219,15 +162,13 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 			// insert pend element in main chain
 			main.insert(main.begin() + lo * element_size, cur_pend_element.begin(), cur_pend_element.end());
 			// update main chain IDs, insert b[i] with max value
-			main_ids.insert(main_ids.begin() + lo, std::numeric_limits<size_t>::max());
+			main_positions.insert(main_positions.begin() + lo, std::numeric_limits<size_t>::max());
 		}
 	}
 
 	// copy sorted main chain back to the original chain
 	for (size_t i = 0; i < main.size(); i++)
 		v[i] = main[i];
-
-
 
 	std::cout << "- after insert ";
 	print_vector(v);
