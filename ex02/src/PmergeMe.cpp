@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/04 17:53:27 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/05 14:55:55 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,12 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 			print_vector(insertion_order);
 		}
 
-		// jedes pent element bearbeiten
+		// save original position for border (search_end)
+		std::vector<size_t> main_ids;
+		for (size_t k = 0; k <= count_pairs; k++)
+			main_ids.push_back(k); // b1, a1, a2, a3, ...
+
+		// jedes pend element bearbeiten
 		for (size_t i = 0; i < insertion_order.size(); i++)
 		{
 			size_t pend_idx = insertion_order[i];
@@ -176,12 +181,31 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 
 
 			// ### BOUND BERECHNEN HIER NOCH EINBAUEN ###
-			size_t search_end = main.size() / element_size; // ganze main chain durchsuchen, da bound fehlt
+			// claculate border (pend[b +2])
+			size_t border = main_ids.size(); // ganze main chain durchsuchen
 
+			// if odd then search in the whole main chain, because it has no a
+			bool is_odd_element = false;
+			if ((count_elements % 2 == 1) && (pend_idx == pend_count - 1))
+				is_odd_element = true;
+
+			if (!is_odd_element)
+			{
+				size_t a_element_id = pend_idx + 2;
+				// search for index of the a element in main_ids
+				for (size_t i = 0; i < main_ids.size(); i++)
+				{
+					if (main_ids[i] == a_element_id)
+					{
+						border = i;
+						break ;
+					}
+				}
+			}
 
 			// binary search for insert position
 			size_t lo = 0;
-			size_t hi = search_end;
+			size_t hi = border;
 			while (lo < hi)
 			{
 				size_t mid_element = lo + (hi - lo) / 2;
@@ -194,6 +218,8 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 
 			// insert pend element in main chain
 			main.insert(main.begin() + lo * element_size, cur_pend_element.begin(), cur_pend_element.end());
+			// update main chain IDs, insert b[i] with max value
+			main_ids.insert(main_ids.begin() + lo, std::numeric_limits<size_t>::max());
 		}
 	}
 
@@ -202,9 +228,7 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 		v[i] = main[i];
 
 
-	if (element_size == 4)
-	{
-		std::cout << "- after insert ";
-		print_vector(v);
-	}
+
+	std::cout << "- after insert ";
+	print_vector(v);
 }
