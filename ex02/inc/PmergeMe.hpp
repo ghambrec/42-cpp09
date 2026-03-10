@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:38 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/04 17:28:35 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 10:30:51 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <limits>
 
 void print_vector(const std::vector<int>& v);
-void fjalgo(std::vector<int>& v, size_t element_size);
+void fj_algo(std::vector<int>& v, size_t element_size);
 
 
 // element size 4

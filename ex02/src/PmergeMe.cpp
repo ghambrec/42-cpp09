@@ -6,20 +6,11 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/05 15:41:21 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:14:49 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-
-void print_vector(const std::vector<size_t> &v)
-{
-	for (size_t n : v)
-	{
-		std::cout << n << " ";
-	}
-	std::cout << "\n";
-}
 
 static std::vector<size_t> get_insertion_order(size_t pend_count)
 {
@@ -45,17 +36,12 @@ static std::vector<size_t> get_insertion_order(size_t pend_count)
 	return (insertion_order);
 }
 
-void fjalgo(std::vector<int> &v, size_t element_size)
+// STEP 1 - BUILD AND SORT PAIRS
+// pair = [b,a]
+// b = smaller value
+// a = bigger value
+static void fj_build_and_sort_pairs(std::vector<int>& v, size_t count_pairs, size_t element_size)
 {
-	if ((v.size() / element_size) < 2)
-		return;
-
-	// ############### STEP 1 - BUILD AND SORT PAIRS ###############
-	// pair = [b,a]
-	// b = smaller value
-	// a = bigger value
-	size_t count_elements = v.size() / element_size;
-	size_t count_pairs = count_elements / 2;
 	for (size_t pair = 0; pair < count_pairs; pair++)
 	{
 		size_t start_left = (2 * pair) * element_size;
@@ -71,16 +57,13 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 			}
 		}
 	}
+}
 
-	fjalgo(v, element_size * 2);
-
-
-	// ############### STEP 2 - BUILD MAIN AND PEND CHAIN ###############
-	// main: b1, a1, a2, a3, ...
-	// pend: b2, b3, b4, ....
-	std::vector<int> main;
-	std::vector<int> pend;
-
+// STEP 2 - BUILD MAIN AND PEND CHAIN
+// main: b1, a1, a2, a3, ...
+// pend: b2, b3, b4, ....
+static void fj_build_chains(std::vector<int>& v, std::vector<int>& main, std::vector<int>& pend, size_t element_size, size_t count_elements, size_t count_pairs)
+{
 	// for each pair
 	for (size_t pair = 0; pair < count_pairs; pair++)
 	{
@@ -102,10 +85,12 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 		size_t start_missing = (count_elements - 1) * element_size;
 		pend.insert(pend.end(), v.begin() + start_missing, v.begin() + start_missing + element_size);
 	}
+}
 
-
-	// ############### STEP 3 - INSERT PEND IN MAIN CHAIN ###############
-	// respect the border: b2 has to be before a2
+// STEP 3 - INSERT PEND IN MAIN CHAIN
+// respect the border: b2 has to be before a2
+static void fj_insert_pend_in_main(std::vector<int>& main, std::vector<int>& pend, size_t element_size, size_t count_elements, size_t count_pairs)
+{
 	size_t pend_count = pend.size() / element_size;
 	if (pend_count > 0)
 	{
@@ -165,6 +150,28 @@ void fjalgo(std::vector<int> &v, size_t element_size)
 			main_positions.insert(main_positions.begin() + lo, std::numeric_limits<size_t>::max());
 		}
 	}
+}
+
+void fj_algo(std::vector<int> &v, size_t element_size)
+{
+	if ((v.size() / element_size) < 2)
+		return;
+
+	// calculate base params
+	size_t count_elements = v.size() / element_size;
+	size_t count_pairs = count_elements / 2;
+
+	// step 1
+	fj_build_and_sort_pairs(v, count_pairs, element_size);
+	fj_algo(v, element_size * 2);
+
+	// init main and pend chain
+	std::vector<int> main;
+	std::vector<int> pend;
+	// step 2
+	fj_build_chains(v, main, pend, element_size, count_elements, count_pairs);
+	// step 3
+	fj_insert_pend_in_main(main, pend, element_size, count_elements, count_pairs);
 
 	// copy sorted main chain back to the original chain
 	for (size_t i = 0; i < main.size(); i++)
