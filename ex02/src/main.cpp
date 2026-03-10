@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:11 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/10 10:30:45 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:38:48 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,17 @@ int main(int argc, char** argv)
 			i++;
 		}
 
+
+
 		// print_vector(v);
 
 		// algo
 		fj_algo(v, 1);
 		// fjalgo(v, 4);
+
 	
+		if (!std::is_sorted(v.begin(), v.end()))
+			throw std::runtime_error("Error: Vector is not sorted!");
 	}
 	catch(const std::exception& e)
 	{

@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:38 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/10 10:30:51 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:36:22 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdexcept>
 #include <regex>
 #include <limits>
+#include <algorithm>
 
 void print_vector(const std::vector<int>& v);
 void fj_algo(std::vector<int>& v, size_t element_size);
