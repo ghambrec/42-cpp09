@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/10 11:55:35 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:03:42 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,15 +168,14 @@ void fj_algo(std::vector<int> &v, size_t element_size)
 	// init main and pend chain
 	std::vector<int> main;
 	std::vector<int> pend;
+
 	// step 2
 	fj_build_chains(v, main, pend, element_size, count_elements, count_pairs);
+
 	// step 3
 	fj_insert_pend_in_main(main, pend, element_size, count_elements, count_pairs);
 
 	// copy sorted main chain back to the original chain
 	for (size_t i = 0; i < main.size(); i++)
 		v[i] = main[i];
-
-	// std::cout << "- after insert ";
-	// print_vector(v);
 }

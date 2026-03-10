@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:11 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/10 11:56:08 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 12:13:33 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ static int parse_argument(const std::string& str)
 	return (static_cast<int>(ln));
 }
 
-void print_vector(const std::vector<int>& v)
+static void print_vector(const std::vector<int>& v)
 {
-	std::cout << "Numbers: ";
 	for (int n : v)
 	{
 		std::cout << n << " ";	
@@ -45,30 +44,32 @@ int main(int argc, char** argv)
 		return (1);
 	}
 
-	// create vector with int numbers
 	std::vector<int> v;
 	int i = 1;
 	try
 	{
-
-
 		while (argv[i])
 		{
 			v.push_back(parse_argument(argv[i]));
 			i++;
 		}
-
-		
+		std::cout << "Before: ";
+		print_vector(v);
 	
 		auto start = std::chrono::steady_clock::now();
 		fj_algo(v, 1);
 		auto end = std::chrono::steady_clock::now();
-
 		auto dauer_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
 		auto dauer_us = dauer_ns / 1000.0;
-
-		std::cout << "Laufzeit: " << std::fixed << std::setprecision(5) << dauer_us << "us\n";
-
+	
+		std::cout << "After:  ";
+		print_vector(v);
+		std::cout	<< "Time to process a range of "
+					<< v.size()
+					<< " elements with std::vector<int> : "
+					<< std::fixed << std::setprecision(5)
+					<< dauer_us
+					<< " us\n";
 	
 		if (!std::is_sorted(v.begin(), v.end()))
 			throw std::runtime_error("Error: Vector is not sorted!");
