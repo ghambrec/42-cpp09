@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:11 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/10 11:38:48 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:56:08 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,24 @@ int main(int argc, char** argv)
 	int i = 1;
 	try
 	{
+
+
 		while (argv[i])
 		{
 			v.push_back(parse_argument(argv[i]));
 			i++;
 		}
 
-
-
-		// print_vector(v);
-
-		// algo
+		
+	
+		auto start = std::chrono::steady_clock::now();
 		fj_algo(v, 1);
-		// fjalgo(v, 4);
+		auto end = std::chrono::steady_clock::now();
+
+		auto dauer_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+		auto dauer_us = dauer_ns / 1000.0;
+
+		std::cout << "Laufzeit: " << std::fixed << std::setprecision(5) << dauer_us << "us\n";
 
 	
 		if (!std::is_sorted(v.begin(), v.end()))

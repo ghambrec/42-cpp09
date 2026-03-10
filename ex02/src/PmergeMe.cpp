@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/10 11:14:49 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/10 11:55:35 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,6 @@ void fj_algo(std::vector<int> &v, size_t element_size)
 	for (size_t i = 0; i < main.size(); i++)
 		v[i] = main[i];
 
-	std::cout << "- after insert ";
-	print_vector(v);
+	// std::cout << "- after insert ";
+	// print_vector(v);
 }
