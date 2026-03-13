@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:12:36 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/03/10 12:51:28 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/13 11:08:36 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void fjv_build_and_sort_pairs(std::vector<int>& v, size_t count_pairs, si
 		size_t key_left = start_right - 1;
 		size_t key_right = start_right + element_size - 1;
 
-		if (v[key_left] > v[key_right]) // vergleich
+		if (v[key_left] > v[key_right]) // comparison
 		{
 			for (size_t i = 0; i < element_size; i++)
 			{
@@ -66,7 +66,6 @@ static void fjv_build_and_sort_pairs(std::vector<int>& v, size_t count_pairs, si
 			}
 		}
 	}
-
 }
 
 // STEP 2 - BUILD MAIN AND PEND CHAIN
@@ -108,9 +107,10 @@ static void fjv_insert_pend_in_main(std::vector<int>& main, std::vector<int>& pe
 		std::vector<size_t> insertion_order = get_insertion_order(pend_count);
 
 		// save original position in main for border
+		// b1, a1, a2, a3 = 0, 1, 2, 3
 		std::vector<size_t> main_positions;
 		for (size_t i = 0; i <= count_pairs; i++)
-			main_positions.push_back(i); // b1, a1, a2, a3, ...
+			main_positions.push_back(i);
 
 		// for each pend element
 		for (size_t i = 0; i < insertion_order.size(); i++)
@@ -149,7 +149,7 @@ static void fjv_insert_pend_in_main(std::vector<int>& main, std::vector<int>& pe
 			{
 				size_t mid_element = lo + (hi - lo) / 2;
 				int mid_key = main[mid_element * element_size + element_size - 1];
-				if (mid_key < key) // vergleich
+				if (mid_key < key) // comparion
 					lo = mid_element + 1;
 				else
 					hi = mid_element;
@@ -212,7 +212,7 @@ static void fjd_build_and_sort_pairs(std::deque<int>& d, size_t count_pairs, siz
 		size_t key_left = start_right - 1;
 		size_t key_right = start_right + element_size - 1;
 
-		if (d[key_left] > d[key_right]) // vergleich
+		if (d[key_left] > d[key_right]) // comparison
 		{
 			for (size_t i = 0; i < element_size; i++)
 			{
@@ -301,7 +301,7 @@ static void fjd_insert_pend_in_main(std::deque<int>& main, std::deque<int>& pend
 			{
 				size_t mid_element = lo + (hi - lo) / 2;
 				int mid_key = main[mid_element * element_size + element_size - 1];
-				if (mid_key < key) // vergleich
+				if (mid_key < key) // comparison
 					lo = mid_element + 1;
 				else
 					hi = mid_element;
