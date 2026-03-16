@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 23:38:04 by ghambrec          #+#    #+#             */
-/*   Updated: 2026/02/25 01:14:47 by ghambrec         ###   ########.fr       */
+/*   Updated: 2026/03/16 14:29:20 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ void rpn(char *str)
 				if (value == "-")
 					result = a - b;
 				if (value == "/")
+				{
+					if (b == 0)
+						throw std::runtime_error("Error: Detected division through zero!");
 					result = a / b;
+				}
 				if (value == "*")
 					result = a * b;
 				stack.push(result);
